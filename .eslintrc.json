@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "parserOptions": {
+      "ecmaVersion": 2017
+  },
+  "rules": {
+      "require-jsdoc": ["off"],
+      "max-len": ["off"],
+      "no-underscore-dangle": ["off"]
+  },
+  "env": { "mocha": true }
+}
