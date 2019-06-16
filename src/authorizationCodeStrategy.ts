@@ -1,8 +1,11 @@
-const qs = require('qs');
-const RefreshTokenStrategy = require('./refreshTokenStrategy');
+import qs from 'qs';
+import { RefreshTokenStrategy } from './refreshTokenStrategy';
 
-class AuthorizationCodeStrategy {
-  constructor(config) {
+export class AuthorizationCodeStrategy {
+  private readonly config: any;
+  private readonly refreshTokenStrategy: RefreshTokenStrategy;
+
+  constructor(config: any) {
     this.config = config;
     this.refreshTokenStrategy = new RefreshTokenStrategy({
       axios: config.axios,
@@ -52,5 +55,3 @@ class AuthorizationCodeStrategy {
     return this.refreshTokenStrategy.getToken();
   }
 }
-
-module.exports = AuthorizationCodeStrategy;

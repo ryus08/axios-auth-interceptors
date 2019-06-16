@@ -1,7 +1,9 @@
-const qs = require('qs');
+import qs from 'qs';
 
-class RefreshTokenStrategy {
-  constructor(config) {
+export class RefreshTokenStrategy {
+  public readonly config: any;
+
+  constructor(config: any) {
     this.config = config;
     this.getToken = this.getToken.bind(this);
   }
@@ -26,5 +28,3 @@ class RefreshTokenStrategy {
     });
   }
 }
-
-module.exports = RefreshTokenStrategy;
