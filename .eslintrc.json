@@ -23,5 +23,15 @@
              "extensions": [".js",".jsx",".ts",".tsx"]
          }
      }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "no-unused-vars": ["off"],
+        "no-undef": ["off"],
+        "import/no-unresolved": ["off"]
+      }
+    }
+  ]
 }

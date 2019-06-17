@@ -5,19 +5,25 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.10.2",
     "qs": "^6.7.0"
   },
   "devDependencies": {
+    "@types/cache-manager": "^1.2.7",
     "@types/qs": "^6.5.3",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
+    "axios": "^0.19.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react": "^7.13.0",
     "mocha": "^6.1.4",
     "typescript": "^3.5.2"
+  },
+  "peerDependencies": {
+    "axios": "^0.19.0",
+    "@types/cache-manager": "^1.2.7"
   },
   "scripts": {
     "build": "tsc",
