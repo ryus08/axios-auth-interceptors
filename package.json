@@ -2,20 +2,26 @@
   "name": "axios-auth-interceptors",
   "version": "0.0.0",
   "description": "Auth interceptors for Axios client",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
     "qs": "^6.7.0"
   },
   "devDependencies": {
-    "eslint": "^4.14.0",
+    "@types/qs": "^6.5.3",
+    "@typescript-eslint/parser": "^1.10.2",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "typescript": "^3.5.2"
   },
   "scripts": {
-    "pretest": "node node_modules/eslint/bin/eslint.js .",
+    "build": "tsc",
+    "prebuild": "node node_modules/eslint/bin/eslint.js ./src --ext .js,.tsx,.ts",
     "test": "./node_modules/.bin/mocha"
   },
   "license": "Apache-2.0"
