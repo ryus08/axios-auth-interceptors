@@ -1,12 +1,27 @@
 {
-  "extends": "airbnb",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["airbnb"],
   "parserOptions": {
-      "ecmaVersion": 2017
+      "ecmaVersion": 2018,
+      "sourceType":  "module"
   },
   "rules": {
       "require-jsdoc": ["off"],
       "max-len": ["off"],
-      "no-underscore-dangle": ["off"]
+      "no-underscore-dangle": ["off"],
+      "import/prefer-default-export": ["off"],
+      "import/extensions": ["off"]
   },
-  "env": { "mocha": true }
+  "env": { "mocha": true },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts",".tsx"]
+     },
+     "import/resolver": {
+         "node": {
+             "extensions": [".js",".jsx",".ts",".tsx"]
+         }
+     }
+  }
 }
