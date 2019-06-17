@@ -1,9 +1,20 @@
 import qs from 'qs';
+import { AxiosAdapter } from 'axios';
+
+export interface IRefreshTokenStrategyConfig {
+  axios: AxiosAdapter;
+  url: string;
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+  redirectUri: string;
+  readRefreshToken: () => string;
+}
 
 export class RefreshTokenStrategy {
-  public readonly config: any;
+  public readonly config: IRefreshTokenStrategyConfig;
 
-  constructor(config: any) {
+  constructor(config: IRefreshTokenStrategyConfig) {
     this.config = config;
     this.getToken = this.getToken.bind(this);
   }

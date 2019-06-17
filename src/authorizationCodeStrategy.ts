@@ -1,11 +1,17 @@
 import qs from 'qs';
-import { RefreshTokenStrategy } from './refreshTokenStrategy';
+import { RefreshTokenStrategy, IRefreshTokenStrategyConfig } from './refreshTokenStrategy';
+
+export interface IAuthorizationCodeStrategyConfig extends IRefreshTokenStrategyConfig{
+  writeRefreshToken: (refreshToken: string) => Promise<void>;
+  readAuthCode: () => Promise<string>;
+}
 
 export class AuthorizationCodeStrategy {
-  private readonly config: any;
+  private readonly config: IAuthorizationCodeStrategyConfig;
+
   private readonly refreshTokenStrategy: RefreshTokenStrategy;
 
-  constructor(config: any) {
+  constructor(config: IAuthorizationCodeStrategyConfig) {
     this.config = config;
     this.refreshTokenStrategy = new RefreshTokenStrategy({
       axios: config.axios,
@@ -48,10 +54,6 @@ export class AuthorizationCodeStrategy {
       }
     }
 
-    return this.refreshTokenStrategy.getToken();
-  }
-
-  async getRefreshToken() {
     return this.refreshTokenStrategy.getToken();
   }
 }
