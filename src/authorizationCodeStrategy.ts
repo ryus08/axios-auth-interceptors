@@ -50,7 +50,7 @@ export class AuthorizationCodeStrategy {
 
         delete authCodeResponse.data.refresh_token;
 
-        return authCodeResponse;
+        return authCodeResponse.data;
       }
     }
 
