@@ -32,10 +32,14 @@ export class RefreshTokenStrategy {
       grant_type: 'refresh_token',
     });
 
-    return this.config.axios({
+    const refreshTokenResponse = await this.config.axios({
       url: this.config.url,
       method: 'post',
       data,
     });
+
+    delete refreshTokenResponse.data.refresh_token;
+
+    return refreshTokenResponse.data;
   }
 }

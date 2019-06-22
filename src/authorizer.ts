@@ -38,14 +38,15 @@ export class Authorizer {
     );
   }
 
-  authTtl(authResponse: any) {
-    return authResponse.data.expires_in - this.config.ttlBuffer;
+  authTtl(cacheableResponse: any) {
+    const data = Array.isArray(cacheableResponse) ? cacheableResponse[1] : cacheableResponse;
+    return data.expires_in - this.config.ttlBuffer;
   }
 
   async interceptor(inputRequestConfig: AxiosRequestConfig) {
     const outputRequestConfig = inputRequestConfig;
     const token = await this.getToken(inputRequestConfig);
-    outputRequestConfig.headers.Authorization = `Bearer ${token.data.access_token}`;
+    outputRequestConfig.headers.Authorization = `Bearer ${token.access_token}`;
 
     return outputRequestConfig;
   }
