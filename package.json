@@ -29,7 +29,7 @@
   "scripts": {
     "build": "tsc",
     "prebuild": "node node_modules/eslint/bin/eslint.js ./src --ext .js,.tsx,.ts",
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha dist/test/"
   },
   "license": "Apache-2.0"
 }
