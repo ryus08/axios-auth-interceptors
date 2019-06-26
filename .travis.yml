@@ -1,6 +1,20 @@
 language: node_js
 node_js:
-  - "8"
-
+- '8'
 before_script:
-  - npm run build
+- npm run build
+before_deploy:
+- npm install semver
+- node ./util/bump-version
+
+deploy:
+  matrix:
+  - provider: npm
+    skip_cleanup: true
+    email: ryus08@yahoo.com
+    api_key:
+      secure: 
+    on:
+      branch: master
+  api_key:
+    secure: dECH9uoce/wAGvdyq4K4xqIX1MY31DwNhXLO9lEi7wG8yctXmV4xX7hrq838gRdrrI2NdGXt0Jam6SwvgnZMj0L9A8Jp7Zcol7c1NDqI+8Z+vQCW3hVX5PJKj4Sd2upEJfCqXev0ilcDQ96XoL8ukgRlCSZekHr/G3C7wGi+JQFyZ0VaQPsIgHMbJyk/Asn8y/WUvnRXHq13+rjuCZ+0yVX0Q6KXzQjpSBCDJmhGwXwCZ3qoATVa/uB2oe/ulbEnr6vC3H5qp6pxOXkr6T4R3FuYrmnCadhhTIfrAj6G8feLd/Wq839bEwm6SpY+rtUBui6LcpSOj4BB+cw1hwmXmL9EAQtz9gKsTu+HyxaRH8XyZLLVQDA/3B8/8y0AZG3RJxwR6VYWj7Y6B6zF7ham9Sg0Tw/AtH54bK/hgWPyYg/S8yR8klrgEKmQmrySZeMH0dfJdXA8ILhnn4nI2VZhKGHIU10/nobfqoPAWKXnCELIDvKMSxK6FEB7/NxpOr+qcQxJ91dGvkF1PFYu2/VXbi/WC8suOOXn6MPZBUQUhf3eYV+AOjsQcwAi751bUCXoWlRaiqin9wTe+0dkfnwE5l0RFXrTRfFhzjHwO7hwCEKIDJNrAF1NEVIh+BnkZzmf1wbW2SC5PNDm8VR+X483uXDGJOz6fP4kXgufuXerEaI=

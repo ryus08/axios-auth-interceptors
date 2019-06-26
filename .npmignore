@@ -1,0 +1,7 @@
+tsconfig.json
+.travis.yml
+.eslintrc.json
+src/
+test/
+dist/test/
+.npmignore
