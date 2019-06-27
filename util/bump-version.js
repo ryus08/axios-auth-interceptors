@@ -5,7 +5,6 @@ const semver = require('semver');
 
 const package = require(`${process.cwd()}/package.json`);
 
-let complete = false;
 const packageName = package.name;
 const packageVersion = package.version;
 console.log(`package version of ${packageVersion}: ${packageName}`);
@@ -15,10 +14,12 @@ if (package.publishConfig) {
   viewCommand += ` --registry=${package.publishConfig.registry}`;
 }
 
-exec(viewCommand)
-  .then((versions) => {
-    if (versions) {
-      versions = JSON.parse(versions);
+async function run() {
+  try {
+    let versions = await exec(viewCommand);
+    let gitTag;
+    if (versions && versions.stdout) {
+      versions = JSON.parse(versions.stdout);
       if (!Array.isArray(versions)) {
         versions = [versions];
       }
@@ -26,23 +27,20 @@ exec(viewCommand)
       console.log(`latest published version: ${latestVersion}`);
       const newVersion = semver.inc(latestVersion, 'patch');
       console.log(`version to publish: ${newVersion}`);
-      return exec(`npm --allow-same-version --no-git-tag-version version ${newVersion}`);
+      gitTag = await exec(`npm --allow-same-version --no-git-tag-version version ${newVersion}`);
+    } else {
+      console.log('no published version, using package version');
+      gitTag = await exec(`npm --allow-same-version --no-git-tag-version version ${packageVersion}`);
     }
-    console.log('no published version, using package version');
-    return exec(`npm --allow-same-version --no-git-tag-version version ${packageVersion}`);
-  })
-  .then(gitTag => gitTag.trim())
-  .tap(gitTag => exec(`echo ${gitTag} > .git-tag`))
-  .then(gitTag => console.log(`${gitTag} written to .git-tag`))
-  .tap(() => complete = true)
-  .catch((e) => {
-    console.log(e);
-    complete = true;
-  });
+    gitTag = gitTag.stdout.trim();
+    await exec(`echo ${gitTag} > .git-tag`);
+    console.log(`${gitTag} written to .git-tag`);
 
-const wait = () => {
-  if (!complete) {
-    setTimeout(wait, 1000);
+    return gitTag;
+  } catch (e) {
+    console.log(e);
+    throw e;
   }
-};
-wait();
+}
+
+run();
