@@ -1,9 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
-import { CorrectCache } from './correctCache';
+import { Cache } from 'cache-manager';
 import { IAuthorizerStrategy } from './strategy';
 
 export interface IAuthorizerConfig {
-  cache: CorrectCache;
+  cache: Cache;
   strategy: IAuthorizerStrategy;
   ttlBuffer: number;
   cacheKeyBuilder?: (requestConfig: AxiosRequestConfig) => string;
